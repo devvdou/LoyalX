@@ -61,37 +61,55 @@
                 </div>
             </div>
 
-            <!-- Scripts -->
-            <script src="js/db.js"></script>
-            <script src="js/ui.js"></script>
-            <script>
-                function init() {
-                    const config = DB.config.get();
-                    document.getElementById('input-name').value = config.nombreNegocio;
-                    document.getElementById('input-banner').value = config.imagenBanner;
-                    document.getElementById('input-total').value = config.totalSellos;
-                }
+            <!-- Danger Zone -->
+            <div class="bg-red-50 rounded-2xl p-6 border border-red-100">
+                <h2 class="text-lg font-bold text-red-700 mb-2 flex items-center gap-2">
+                    <span>⚠️</span> Zona de Peligro
+                </h2>
+                <p class="text-red-600/80 text-sm mb-4">Esta acción borrará todos los clientes y restaurará los datos
+                    iniciales del sistema.</p>
 
-                function saveSettings() {
-                    const data = DB.load();
-                    data.config.nombreNegocio = document.getElementById('input-name').value;
-                    data.config.imagenBanner = document.getElementById('input-banner').value;
-                    data.config.totalSellos = parseInt(document.getElementById('input-total').value);
+                <button onclick="factoryReset()"
+                    class="w-full py-3 bg-white border border-red-200 text-red-600 rounded-lg font-bold hover:bg-red-50 transition-colors">
+                    Restaurar Valores de Fábrica (Reset DB)
+                </button>
+            </div>
 
-                    DB.save(data);
-                    UI.toast("Configuración guardada");
-                }
+        </div>
 
-                function factoryReset() {
-                    if (confirm("¿Estás seguro? Se perderán todos los cambios.")) {
-                        DB.reset();
-                        UI.toast("Base de datos restaurada", "warning");
-                        setTimeout(() => window.location.href = 'index.html', 1000);
-                    }
-                }
+    </div>
 
-                init();
-            </script>
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        function init() {
+            const config = DB.config.get();
+            document.getElementById('input-name').value = config.nombreNegocio;
+            document.getElementById('input-banner').value = config.imagenBanner;
+            document.getElementById('input-total').value = config.totalSellos;
+        }
+
+        function saveSettings() {
+            const data = DB.load();
+            data.config.nombreNegocio = document.getElementById('input-name').value;
+            data.config.imagenBanner = document.getElementById('input-banner').value;
+            data.config.totalSellos = parseInt(document.getElementById('input-total').value);
+
+            DB.save(data);
+            UI.toast("Configuración guardada");
+        }
+
+        function factoryReset() {
+            if (confirm("¿Estás seguro? Se perderán todos los cambios.")) {
+                DB.reset();
+                UI.toast("Base de datos restaurada", "warning");
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            }
+        }
+
+        init();
+    </script>
 </body>
 
 </html>
