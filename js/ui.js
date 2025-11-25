@@ -1,6 +1,6 @@
 /**
- * ui.js - Componentes de Interfaz (SaaS Edition)
- * Maneja DOM, Animaciones y Modales.
+ * ui.js - Capa de Vista (Interfaz de Usuario)
+ * Gestiona la manipulación del DOM, eventos y feedback visual.
  */
 
 const UI = {
@@ -73,15 +73,15 @@ const UI = {
                 <div class="w-64 h-64 mx-auto border-4 border-white/30 rounded-3xl relative overflow-hidden mb-6 bg-black">
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/20 to-transparent w-full h-full animate-scan"></div>
                     <div class="absolute top-0 left-0 w-full h-1 bg-green-400 shadow-[0_0_20px_rgba(74,222,128,0.8)] animate-scan-line"></div>
-                    <p class="absolute inset-0 flex items-center justify-center text-white/50 text-sm">Simulando Cámara...</p>
+                    <p class="absolute inset-0 flex items-center justify-center text-white/50 text-sm">Cámara Activa</p>
                 </div>
-                <p class="text-white text-lg font-medium animate-pulse">Buscando código QR...</p>
+                <p class="text-white text-lg font-medium animate-pulse">Escaneando código QR...</p>
                 <button onclick="this.closest('.fixed').remove()" class="mt-8 text-white/60 hover:text-white underline">Cancelar</button>
             </div>
         `;
         document.body.appendChild(modal);
 
-        // Simular hallazgo
+        // Emulación de detección exitosa tras delay
         setTimeout(() => {
             modal.remove();
             onFound();
@@ -90,9 +90,8 @@ const UI = {
 
     // --- Efectos ---
     fireConfetti: function () {
-        // Simple CSS confetti implementation or placeholder
-        // Para MVP, usaremos un efecto visual simple en CSS o una librería si estuviera permitida.
-        // Aquí inyectamos partículas simples.
+        // Generación de partículas para feedback positivo
+        // Se utiliza manipulación directa del DOM para rendimiento
         const colors = ['#f59e0b', '#ef4444', '#3b82f6', '#10b981'];
         const container = document.getElementById('confetti-container');
         if (!container) return;

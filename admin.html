@@ -157,23 +157,184 @@
 
         function handleRedeem(id) {
             const cliente = DB.clientes.findById(id);
-            if (DB.clientes.canjear(id)) {
-                UI.showRedeemModal(cliente.nombre);
-                init(); // Refresh all
-            }
+< !DOCTYPE html >
+                <html lang="es">
+
+                    <head>
+                        <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>LoyalX - Dashboard</title>
+                                <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body class="bg-slate-50 text-slate-900 flex h-screen overflow-hidden">
+
+        <!-- Sidebar (Desktop) -->
+        <aside class="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 h-full">
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center font-bold text-white">L
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">LoyalX</span>
+                </div>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 bg-amber-50 text-amber-700 rounded-xl font-medium transition-colors">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="config.html"
+                    class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-xl font-medium transition-colors">
+                    <span>⚙️</span> Configuración
+                </a>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-xl font-medium transition-colors">
+                    <span>🚪</span> Salir
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-100">
+                <div class="flex items-center gap-3">
+                    <img id="shop-avatar" src="" class="w-10 h-10 rounded-full bg-gray-200 object-cover">
+                    <div>
+                        <p class="text-sm font-bold text-gray-900" id="shop-name">Cargando...</p>
+                        <p class="text-xs text-gray-500">Plan Pro</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+            <!-- Mobile Header -->
+            <header class="md:hidden bg-white border-b border-gray-200 p-4 flex justify-between items-center z-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center font-bold text-white">L
+                    </div>
+                    <span class="font-bold">LoyalX</span>
+                </div>
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                    class="text-gray-600">
+                    ☰
+                </button>
+            </header>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu"
+                class="hidden absolute inset-0 bg-white z-50 p-6 flex flex-col animate-fade-in md:hidden">
+                <div class="flex justify-end mb-8">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('hidden')"
+                        class="text-2xl">✕</button>
+                </div>
+                <nav class="space-y-4 text-lg font-medium">
+                    <a href="#" class="block text-amber-600">Dashboard</a>
+                    <a href="config.html" class="block text-gray-600">Configuración</a>
+                    <a href="index.html" class="block text-gray-600">Salir</a>
+                </nav>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-4 md:p-8">
+
+                <!-- Header & Actions -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Panel de Control</h1>
+                        <p class="text-gray-500">Gestiona tus clientes y recompensas.</p>
+                    </div>
+                    <button onclick="scanQR()"
+                        class="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 active:scale-95">
+                        <span>📷</span> Escanear Cliente
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <p class="text-gray-500 text-sm font-medium mb-1">Clientes Totales</p>
+                        <p class="text-3xl font-bold text-gray-900" id="stat-total">0</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <p class="text-gray-500 text-sm font-medium mb-1">Sellos Hoy</p>
+                        <p class="text-3xl font-bold text-amber-500" id="stat-today">0</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <p class="text-gray-500 text-sm font-medium mb-1">Canjes Pendientes</p>
+                        <p class="text-3xl font-bold text-emerald-500" id="stat-pending">0</p>
+                    </div>
+                </div>
+
+                <!-- Clients Grid -->
+                <h2 class="text-lg font-bold text-gray-900 mb-4">Clientes Recientes</h2>
+                <div id="clients-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Cards injected by JS -->
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Scripts -->
+        <script src="js/db.js"></script>
+        <script src="js/logic.js"></script>
+        <script src="js/ui.js"></script>
+        <script>
+                        function init() {
+            const config = DB.config.get();
+                        const stats = Logic.getDashboardStats();
+
+                        // Setup Header
+                        document.getElementById('shop-name').innerText = config.nombreNegocio;
+                        document.getElementById('shop-avatar').src = config.imagenBanner;
+
+                        // Setup Stats
+                        document.getElementById('stat-total').innerText = stats.totalClientes;
+                        document.getElementById('stat-today').innerText = stats.sellosHoy;
+                        document.getElementById('stat-pending').innerText = stats.canjesPendientes;
+
+                        renderGrid();
         }
 
-        function scanQR() {
-            UI.showQRScanner(() => {
-                // Simular encontrar al cliente ID 2 (Diego)
-                const cliente = DB.clientes.findById(2);
-                UI.toast(`Cliente encontrado: ${cliente.nombre}`, 'success');
-                // Opcional: Resaltar su tarjeta o abrir modal
+                        function renderGrid() {
+            const clientes = DB.clientes.findAll();
+                        const config = DB.config.get();
+                        const grid = document.getElementById('clients-grid');
+
+                        grid.innerHTML = '';
+            clientes.forEach(cliente => {
+                const card = UI.renderClientCard(cliente, config, handleAddStamp, handleRedeem);
+                        grid.appendChild(card);
             });
         }
 
-        init();
-    </script>
-</body>
+                        function handleAddStamp(id) {
+            if (DB.clientes.addSello(id)) {
+                            UI.toast("Sello agregado correctamente");
+                        init(); // Refresh all
+            }
+        }
+
+                        function handleRedeem(id) {
+            const cliente = DB.clientes.findById(id);
+                        if (DB.clientes.canjear(id)) {
+                            UI.showRedeemModal(cliente.nombre);
+                        init(); // Refresh all
+            }
+        }
+
+                        function scanQR() {
+                            UI.showQRScanner(() => {
+                                // Procesar lectura de QR (Mock para demo)
+                                const cliente = DB.clientes.findById(2);
+                                UI.toast(`Cliente identificado: ${cliente.nombre}`, 'success');
+                                // Opcional: Resaltar su tarjeta o abrir modal
+                            });
+        }
+
+                        init();
+        </script>
+    </body>
 
 </html>

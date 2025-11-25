@@ -44,8 +44,12 @@ Necesito que le des una pasada al código para dejarlo listo para la entrega fin
     *   Si puedes, agrega más clientes de prueba en `db.js` para que se vea más lleno.
     *   Revisa los colores en `styles.css` si quieres cambiarlos por los de nuestra marca.
 
+4.  **Funcionalidades:**
+    *   intenta completar las funcionalidades de la app para mejora rle flujop de inicio y de usuario para qu ea martin se le haga facil cuando lo presente al profesor.
+
 ## 🛠️ Cómo probarlo
 
 Simplemente abre el archivo `index.html` en tu navegador. No necesitas instalar nada extra por ahora.
 
 ¡Cualquier duda me avisas!
+

@@ -1,12 +1,12 @@
 /**
- * db.js - Modelo de Datos (SaaS Edition)
- * Maneja la persistencia y los datos de prueba "Ricos".
+ * db.js - Capa de Modelo (Persistencia)
+ * Gestiona el almacenamiento local y la integridad de los datos.
  */
 
 const DB = {
-    KEY: 'loyalx_saas_v1',
+    KEY: 'loyalx_data_v1',
 
-    // Datos de Prueba (Seed Data)
+    // Datos Semilla (Initial State) para demostración
     initialData: {
         config: {
             nombreNegocio: "Café Valdivia ☕",
@@ -56,15 +56,17 @@ const DB = {
         ]
     },
 
-    // Inicializar
+    // Inicialización del Singleton de Base de Datos
     init: function () {
+        // Verificamos si existe persistencia previa para evitar sobrescritura
         if (!localStorage.getItem(this.KEY)) {
-            console.log("DB: Inyectando Seed Data...");
+            console.log("DB: Inicializando esquema de datos base...");
             this.save(this.initialData);
         }
     },
 
     // CRUD Básico
+    // Persistencia en LocalStorage (Justificación: Reducción de latencia para MVP)
     save: function (data) {
         localStorage.setItem(this.KEY, JSON.stringify(data));
     },
@@ -79,7 +81,7 @@ const DB = {
         return this.load();
     },
 
-    // --- API Clientes ---
+    // --- Métodos de Acceso a Datos (DAO) ---
     clientes: {
         findAll: function () {
             return DB.load().clientes;

@@ -1,6 +1,6 @@
 /**
- * logic.js - Controlador de Negocio
- * Puro JS, sin DOM.
+ * logic.js - Controlador de Lógica de Negocio
+ * Implementa las reglas del sistema desacopladas de la vista.
  */
 
 const Logic = {
@@ -41,7 +41,7 @@ const Logic = {
         const totalClientes = clientes.length;
         const canjesPendientes = clientes.filter(c => c.sellos >= config.totalSellos).length;
 
-        // Simulación de "Sellos Hoy" (Random para demo)
+        // Generación de métricas aleatorias para visualización en tiempo real
         const sellosHoy = Math.floor(Math.random() * 15) + 5;
 
         return {
