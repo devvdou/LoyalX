@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EditarTarjeta</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+	<script src="js/loader.js"></script>
+</head>
+
+<body>
+	<div id="app-frame">
+		<div class="flex items-center justify-between px-4 py-4 bg-card border-b border-border z-20">
+			<div class="flex items-center gap-2">
+				<button onclick="window.history.back()" class="text-muted-foreground hover:text-foreground">
+					<iconify-icon icon="solar:arrow-left-linear" class="size-6"></iconify-icon>
+				</button>
+				<h1 class="text-lg font-bold text-foreground font-heading">Editar Tarjeta</h1>
+			</div>
+		</div>
+
+		<div class="flex-1 overflow-y-auto p-6 z-10 content-container">
+			<form id="form-config" class="space-y-6">
+				<div class="space-y-4">
+					<div>
+						<label class="block text-sm font-medium text-foreground mb-1">Nombre del Local</label>
+						<div class="relative">
+							<iconify-icon icon="solar:shop-linear"
+								class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-5"></iconify-icon>
+							<input type="text" id="nombreLocal" required
+								class="w-full bg-white border border-border rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+						</div>
+					</div>
+
+					<div>
+						<label class="block text-sm font-medium text-foreground mb-1">Sellos Necesarios</label>
+						<div class="relative">
+							<iconify-icon icon="solar:diploma-verified-linear"
+								class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-5"></iconify-icon>
+							<input type="number" id="sellosNecesarios" min="1" max="20" required
+								class="w-full bg-white border border-border rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+						</div>
+						<p class="text-xs text-muted-foreground mt-1">Entre 1 y 20 sellos</p>
+					</div>
+
+					<div>
+						<label class="block text-sm font-medium text-foreground mb-1">Recompensa</label>
+						<div class="relative">
+							<iconify-icon icon="solar:gift-linear"
+								class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground size-5"></iconify-icon>
+							<input type="text" id="recompensa" required
+								class="w-full bg-white border border-border rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+						</div>
+					</div>
+				</div>
+
+				<div class="pt-4">
+					<button type="submit"
+						class="w-full bg-primary hover:bg-primary/90 text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+						<iconify-icon icon="solar:disk-bold" class="size-6"></iconify-icon>
+						Guardar Cambios
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="js/utils.js"></script>
+	<script src="js/data.js"></script>
+	<script src="js/session.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/config-local.js"></script>
+</body>
+
+</html>

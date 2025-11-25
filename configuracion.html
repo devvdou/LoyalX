@@ -1,0 +1,33 @@
+const recompensa = document.getElementById('input-recompensa').value;
+
+if (!nombre || !sellos || !recompensa) {
+showToast('Todos los campos son obligatorios', 'error');
+return;
+}
+
+Logic.actualizarConfig({
+nombre_local: nombre,
+total_sellos: sellos,
+recompensa: recompensa
+});
+
+showToast('Configuración guardada correctamente', 'success');
+setTimeout(() => window.history.back(), 1000);
+};
+
+window.confirmarReset = function () {
+showConfirmModal(
+'⚠️ ¿ESTÁS SEGURO? Se borrarán todos los datos permanentemente.',
+() => {
+// Segunda confirmación por seguridad
+if (confirm("ÚLTIMA ADVERTENCIA: ¿Borrar todo?")) {
+Logic.resetearFabrica();
+window.location.assign('index.html');
+}
+}
+);
+};
+</script>
+</body>
+
+</html>
